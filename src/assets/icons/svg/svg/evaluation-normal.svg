@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>evaluation_normal@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-译泰后台管理系统" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="00登录界面默认-copy" transform="translate(-1560.000000, -801.000000)">
+            <g id="测评专区" transform="translate(1560.000000, 801.000000)">
+                <g>
+                    <rect id="Rectangle-24" fill="#D8D8D8" opacity="0" x="0" y="0" width="120" height="120"></rect>
+                    <rect id="Rectangle-25" fill="#5F9CFF" x="18" y="102" width="84" height="12"></rect>
+                    <polygon id="Path-10" fill="#DAE3F2" fill-rule="nonzero" points="56.901214 41.1378522 63.098786 30.8621478 79.1942479 40.5697825 72.9966758 50.8454869"></polygon>
+                    <path d="M50.1815385,18.7880989 L50.1815385,75.9965982 L57.9787517,85.4330979 L65.4176387,76.0626776 L65.4176387,18.7880989 L50.1815385,18.7880989 Z M77.4176387,6.78809886 L77.4176387,80.2468013 L58.1653197,104.498053 L38.1815385,80.3128806 L38.1815385,6.78809886 L77.4176387,6.78809886 Z" id="Rectangle-26" fill="#DAE3F2" fill-rule="nonzero" transform="translate(57.799589, 55.643076) rotate(33.000000) translate(-57.799589, -55.643076) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

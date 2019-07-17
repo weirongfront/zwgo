@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>shrink</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-译泰后台管理系统" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标" transform="translate(-1554.000000, -1463.000000)">
+            <g id="缩小" transform="translate(1554.000000, 1463.000000)">
+                <g id="Group-2">
+                    <rect id="Path" fill="#D8D8D8" opacity="0" x="0" y="0" width="120" height="120"></rect>
+                    <path d="M54,96 C77.1959595,96 96,77.1959595 96,54 C96,30.8040405 77.1959595,12 54,12 C30.8040405,12 12,30.8040405 12,54 C12,77.1959595 30.8040405,96 54,96 Z M96.1367711,87.7742898 L120.041282,111.640699 L111.562771,120.132746 L87.6378247,96.2459334 C78.4103731,103.602899 66.7186856,108 54,108 C24.1766235,108 0,83.8233765 0,54 C0,24.1766235 24.1766235,0 54,0 C83.8233765,0 108,24.1766235 108,54 C108,66.7814675 103.559382,78.5257729 96.1367711,87.7742898 Z" id="Combined-Shape" fill="#555555" fill-rule="nonzero"></path>
+                    <rect id="Rectangle-31" fill="#555555" x="24" y="48" width="60" height="12"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

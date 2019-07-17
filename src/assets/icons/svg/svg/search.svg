@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>search@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-译泰后台管理系统" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="00登录界面默认-copy" transform="translate(-622.000000, -1143.000000)">
+            <g id="搜索icon" transform="translate(622.000000, 1143.000000)">
+                <rect id="Rectangle-14" fill="#D8D8D8" opacity="0" x="0" y="0" width="120" height="120"></rect>
+                <path d="M55.7142857,102.857143 C81.7505668,102.857143 102.857143,81.7505668 102.857143,55.7142857 C102.857143,29.6780047 81.7505668,8.57142857 55.7142857,8.57142857 C29.6780047,8.57142857 8.57142857,29.6780047 8.57142857,55.7142857 C8.57142857,81.7505668 29.6780047,102.857143 55.7142857,102.857143 Z M55.7142857,111.428571 C24.9441354,111.428571 0,86.4844361 0,55.7142857 C0,24.9441354 24.9441354,0 55.7142857,0 C86.4844361,0 111.428571,24.9441354 111.428571,55.7142857 C111.428571,86.4844361 86.4844361,111.428571 55.7142857,111.428571 Z" id="Oval-3" fill="#555555" fill-rule="nonzero"></path>
+                <rect id="Rectangle-4" fill="#555555" transform="translate(103.269403, 103.269403) rotate(-45.000000) translate(-103.269403, -103.269403) " x="98.9836889" y="84.5036332" width="8.57142857" height="37.5315399" rx="4.28571429"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

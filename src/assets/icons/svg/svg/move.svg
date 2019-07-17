@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>move</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-译泰后台管理系统" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标" transform="translate(-914.000000, -1463.000000)">
+            <g id="选择" transform="translate(914.000000, 1463.000000)">
+                <g id="Group-5">
+                    <rect id="Rectangle-32" fill="#D8D8D8" opacity="0" x="0" y="0" width="120" height="120"></rect>
+                    <path d="M66,90 L84.1233693,90 L60.1360681,119.963114 L36,90 L54,90 L54,66 L29.9631138,66 L29.9631138,84.1233693 L-3.0755826e-16,60.1360681 L29.9631138,36 L29.9631138,54 L54,54 L54,29.9631138 L36,29.9631138 L59.9873012,0 L84.1233693,29.9631138 L66,29.9631138 L66,54 L90,54 L90,36 L119.963114,59.9873012 L90,84.1233693 L90,66 L66,66 L66,90 Z" id="Combined-Shape" fill="#555555"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

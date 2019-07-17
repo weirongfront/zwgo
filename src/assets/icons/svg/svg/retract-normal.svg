@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="112px" height="70px" viewBox="0 0 112 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>retract_normal@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-译泰后台管理系统" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="00登录界面默认-copy" transform="translate(-2167.000000, -830.000000)" fill="#DAE3F2">
+            <path d="M2171.2542,828 L2274.17037,828 C2276.37951,828 2278.17037,829.790861 2278.17037,832 C2278.17037,832.970602 2277.81746,833.908093 2277.17741,834.637751 L2223.011,896.387458 C2221.55421,898.048198 2219.02695,898.213533 2217.36621,896.756743 C2217.18322,896.596225 2217.01527,896.419338 2216.86443,896.228284 L2168.11467,834.478577 C2166.74579,832.744662 2167.0417,830.229349 2168.77562,828.860469 C2169.48157,828.303138 2170.35476,828 2171.2542,828 Z" id="retract_normal" transform="translate(2223.000000, 864.000000) rotate(-180.000000) translate(-2223.000000, -864.000000) "></path>
+        </g>
+    </g>
+</svg>

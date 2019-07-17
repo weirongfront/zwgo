@@ -1,0 +1,84 @@
+// layout size
+$min-width:1024;
+$min-height:$min-width/16*9;
+
+$header-height:70;
+
+//----色值部分----
+// 品牌色（整体主色调）
+$blue:#3a85ff;  $blue-hover:#77abff;  $blue-click:#396abb;
+$green:#2ec0a0; $blue-hover:#77abff; $blue-click:#396abb;
+$red:#f35a51; $blue-hover:#77abff; $blue-click:#396abb;
+$gray:#c3cad0; $blue-hover:#77abff; $blue-click:#396abb;
+
+// 字体颜色
+$font-black-color:#222222;
+$font-black1-color:#555555;
+$font-black2-color:#999999;
+$tip-color:#b5b5b5;
+$link-color:#3a85ff;
+$placeholder-color:$tip-color;
+$input-border-color:#c8d3da;
+$input-hover-color:#9baab4;
+$input-focus-color:$link-color;
+
+// 背景颜色
+$body-bg-color:#f1f3f7;
+$content-bg-color: #ffffff;
+$table-th-bg-color:#f3f7fa;
+
+//----尺寸部分----
+// 文字
+
+$font-f1-size:22px;
+$font-f2-size:20px;
+$font-f3-size:18px;
+$font-f4-size:16px;
+$font-f5-size:14px;
+$font-none-size: 0;
+
+$body-size:$font-f4-size;
+
+
+%yt-input{
+  outline: none;border:1px solid $input-border-color;border-radius:2px;font-size: $font-f4-size;color:$font-black-color;background: transparent;-webkit-appearance: none;
+  &:hover{
+    border-color:$input-hover-color;
+  }
+  &:focus{
+    border-color:$input-focus-color;
+  }
+  &:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #fff inset;
+    -webkit-text-fill-color: #fff;
+  }
+}
+
+
+// sidebar
+$sidebarWidth:200;
+$menuBg:#1f2d52;
+$menuText:#dae3f2;
+$menuActiveText:#fff;
+$subMenuActiveText:$blue;
+
+// treebar
+$treeWidth:340;
+
+// crumbs
+$crumbsHeight:60;
+
+:export {
+  menuBg:$menuBg;
+  minWidth: $min-width;
+  minHeight:$min-height;
+  headerHeight:$header-height;
+  menuText:$menuText;
+  menuActiveText:$menuActiveText;
+  subMenuActiveText:$subMenuActiveText;
+
+  sidebarWidth:$sidebarWidth;
+  treeWidth:$treeWidth;
+
+  crumbsHeight:$crumbsHeight;
+}

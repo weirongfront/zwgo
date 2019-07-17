@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>turn_right</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-译泰后台管理系统" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标" transform="translate(-2000.000000, -1463.000000)">
+            <g id="右转" transform="translate(2000.000000, 1463.000000)">
+                <g id="Group-4">
+                    <rect id="Rectangle-34" fill="#D8D8D8" opacity="0" x="0" y="0" width="120" height="120"></rect>
+                    <g id="Group-6" transform="translate(58.000000, 60.000000) scale(-1, 1) translate(-58.000000, -60.000000) " fill="#555555" fill-rule="nonzero">
+                        <path d="M16.6106738,15.2401544 C27.157441,5.89839126 41.0298961,0.226980223 56.2269802,0.226980223 C89.2387075,0.226980223 116,26.9882727 116,60 C116,93.0117273 89.2387075,119.77302 56.2269802,119.77302 C31.1538784,119.77302 9.68647873,104.335173 0.811544015,82.446243 L11.9322305,77.9373261 C19.1843849,95.8238691 36.5953798,107.77302 56.2269802,107.77302 C82.6112905,107.77302 104,86.3843103 104,60 C104,33.6156897 82.6112905,12.2269802 56.2269802,12.2269802 C44.7614057,12.2269802 33.9600948,16.2716075 25.4364654,23.4703382 L35.4676607,32.8245791 L4.42738254,37.3642625 L6.70182136,6 L16.6106738,15.2401544 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
