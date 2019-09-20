@@ -1,10 +1,17 @@
-# 运营管理平台
-
-## 启动项目
-
-### 使用 VUE UI 启动项目
-
+# zwgo 网
+网站地址：http://www.zwgo.xyz
+## 项目
 ```
+// clone 地址
+https://github.com/benchis/zwgo.git
+
+// 第一步：运行
+npm install
+
+// 第二步：如果安装 cli3.0 请忽略此步骤
+npm install -g @vue/cli
+
+// 第三部：运行启动页面
 vue ui
 ```
 
@@ -31,18 +38,8 @@ npm run lint
 npm run test:unit
 ```
 
-### views 菜单权限命名说明
+### 
 
 ```
-views
-        inlet （入口）
-                inlet.vue ---- 系统入口选择页
-        institutional（机构管理）
-        user（用户管理）
-        jurisdiction（权限管理）
-        ape （猿类专区）
-        log（日志管理）
-        content （内容专区）
-        comprehensive （综评专区）
-        assess （测评专区）
+
 ```
