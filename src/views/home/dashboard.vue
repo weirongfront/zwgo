@@ -1,6 +1,6 @@
 <template>
     <div>
-        正在进入...
+        <a href="#/views">去视图页</a>
     </div>
 </template>
 <script>
