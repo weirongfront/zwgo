@@ -3,7 +3,6 @@ const path = require('path')
 function resolve(dir) {
 	return path.join(__dirname, dir);
 }
-
 module.exports = {
 	publicPath: './',
 	outputDir: 'dist',
@@ -16,7 +15,8 @@ module.exports = {
 				'@': resolve('src'),
 				'@scss': resolve('src/assets/scss'),
 				'@imgs': resolve('src/assets/imgs'),
-				'@comp': resolve('src/components')
+				'@comp': resolve('src/components'),
+				'@views': resolve('src/views')
 			}
 		}
 	},

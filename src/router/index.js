@@ -14,83 +14,82 @@ const routes = [];
 // 动态加载路由
 const modulesFiles = require.context('./modules', true, /\.js$/);
 modulesFiles.keys().map((modulePath) => {
-	const value = modulesFiles(modulePath);
-	//判断是否为数组路由
-	if(value.default.length || value.default.length ===0){
-		routes.push(...value.default);
-	}else{
-		routes.push(value.default);
-	}
+    const value = modulesFiles(modulePath);
+    //判断是否为数组路由
+    if (value.default.length || value.default.length === 0) {
+        routes.push(...value.default);
+    } else {
+        routes.push(value.default);
+    }
 });
 
 const createRouter = () => new Router({
-	routes
+    routes
 });
 
 const router = createRouter();
 
 export function resetRouter() {
-	const newRouter = createRouter()
-	router.matcher = newRouter.matcher // reset router
+    const newRouter = createRouter()
+    router.matcher = newRouter.matcher // reset router
 }
 
 NProgress.configure({showSpinner: false}) // NProgress Configuration
 
-const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
+const whiteList = ['/login','/register','/auth-redirect','/questionnaire','/report'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
-	// start progress bar
-	NProgress.start()
-	// set page title
-	document.title = getPageTitle(to.meta.title);
+    // start progress bar
+    NProgress.start()
+    // set page title
+    document.title = getPageTitle(to.meta.title);
+    // determine whether the user has logged in
+    const hasToken = getToken();
 
-	// determine whether the user has logged in
-	const hasToken = getToken();
+    if (hasToken) {
+        // determine whether the user has obtained his permission roles through getInfo
+        const hasRoles = true;//store.getters.roles && store.getters.roles.length > 0
+        if (hasRoles) {
+            next()
+        } else {
+            try {
+                // get user info
+                // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
+                const {roles} = await store.dispatch('user/getInfo')
 
-	if (hasToken) {
-		// determine whether the user has obtained his permission roles through getInfo
-		const hasRoles = true;//store.getters.roles && store.getters.roles.length > 0
-		if (hasRoles) {
-			next()
-		} else {
-			try {
-				// get user info
-				// note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-				const {roles} = await store.dispatch('user/getInfo')
+                // generate accessible routes map based on roles
+                const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
 
-				// generate accessible routes map based on roles
-				const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+                // dynamically add accessible routes
+                router.addRoutes(accessRoutes)
 
-				// dynamically add accessible routes
-				router.addRoutes(accessRoutes)
-
-				// hack method to ensure that addRoutes is complete
-				// set the replace: true, so the navigation will not leave a history record
-				next({...to, replace: true})
-			} catch (error) {
-				// remove token and go to login page to re-login
-				await store.dispatch('user/resetToken')
-				Message.error(error || 'Has Error')
-				next(`/login?redirect=${to.path}`)
-				NProgress.done()
-			}
-		}
-	} else {
-		/* has no token*/
-		if (whiteList.indexOf(to.path) !== -1) {
-			// in the free login whitelist, go directly
-			next();
-		} else {
-			// other pages that do not have permission to access are redirected to the login page.
-			next(`/login?redirect=${to.path}`);
-			NProgress.done()
-		}
-	}
+                // hack method to ensure that addRoutes is complete
+                // set the replace: true, so the navigation will not leave a history record
+                next({...to, replace: true})
+            } catch (error) {
+                // remove token and go to login page to re-login
+                await store.dispatch('user/resetToken')
+                Message.error(error || 'Has Error')
+                next(`/login?redirect=${to.path}`)
+                NProgress.done()
+            }
+        }
+    } else {
+        /* has no token*/
+        if (whiteList.indexOf(to.path) !== -1) {
+            // in the free login whitelist, go directly
+            next();
+        } else {
+            // other pages that do not have permission to access are redirected to the login page.
+            next(`/login?redirect=${to.path}`);
+            NProgress.done()
+        }
+    }
 })
 
 router.afterEach(() => {
-	// finish progress bar
-	NProgress.done()
+    // finish progress bar
+    NProgress.done()
 });
 
 //export default router

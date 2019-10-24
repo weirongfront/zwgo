@@ -1,6 +1,11 @@
 @import './yt.scss';
 @import './yt-variables.scss';
 
-html {height: 100%;}
-body {height: 100%;}
-#app{height: 100%;overflow: hidden;min-width: $min-width+px;min-height: $min-height+px;}
+html,body{min-width: $min-width+px;min-height: 100%;}
+
+#app{min-width: $min-width+px;min-height: $min-height+px;}
+
+@media screen and (max-width: 760px) {
+	html,body{min-width: 100%;min-height: 100%;}
+	#app{min-width: 100%;min-height: 100%;}
+}

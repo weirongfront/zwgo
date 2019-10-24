@@ -1,13 +1,13 @@
-const TokenKey = 'Admin-Token'
+const TokenKey = 'zwgo-Token';
 
 export function getToken() {
-  return TokenKey;
+  return sessionStorage.getItem(TokenKey)
 }
 
 export function setToken(token) {
-  return token;
+  return sessionStorage.setItem(TokenKey, token)
 }
 
 export function removeToken() {
-  return TokenKey;
+  return sessionStorage.removeItem(TokenKey)
 }

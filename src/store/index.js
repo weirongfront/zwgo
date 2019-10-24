@@ -1,7 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VuexPersistence from 'vuex-persist' // vuex持久化插件
 
 Vue.use(Vuex);
+
+const vuexLocal = new VuexPersistence({
+  storage: window.sessionStorage
+});
 
 // 动态加载
 const modulesFiles = require.context('./modules', true, /\.js$/);
@@ -12,7 +17,8 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
   return modules;
 }, {});
 const store = new Vuex.Store({
-  modules
+  modules,
+  plugins: [vuexLocal.plugin]
 });
 
 export default store;

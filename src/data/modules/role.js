@@ -1,17 +1,38 @@
-import {service} from '@/data/index'
+import request from '@/utils/request'
 
-
-export function login(data) {
-  return service({
-    url: '/user/login',
-    method: 'post',
-    data
-  });
+export function getRoutes() {
+  return request({
+    url: '/routes',
+    method: 'get'
+  })
 }
 
-export function logout(data) {
-  return service({
-    url: '/user/logout',
-    method: 'post'
-  });
+export function getRoles() {
+  return request({
+    url: '/roles',
+    method: 'get'
+  })
+}
+
+export function addRole(data) {
+  return request({
+    url: '/role',
+    method: 'post',
+    data
+  })
+}
+
+export function updateRole(id, data) {
+  return request({
+    url: `/role/${id}`,
+    method: 'put',
+    data
+  })
+}
+
+export function deleteRole(id) {
+  return request({
+    url: `/role/${id}`,
+    method: 'delete'
+  })
 }
