@@ -4,9 +4,9 @@ module.exports = (route,db) => {
         const selectUserList = `SELECT * FROM log`;
         db.query(selectUserList, (err, data) => {
             if (err) {
-                res.send(common.result(500,'服务器出错')).end();
+                common.send(req,res,db,500,err.sqlMessage);
             } else {
-                res.send(common.success(data)).end();
+                common.sendSuccess(req,res,db,data);
             }
         });
     });

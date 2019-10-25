@@ -27,11 +27,12 @@ server.use(session({
 server.use(bodyParser.json());
 //the cores config
 server.all('*', function (req, res, next) {
+    req.beginTime = new Date();
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     if (req.method === 'OPTIONS') {
-        res.send(200);
+        res.send(200).end();
     } else {
         next();
     }

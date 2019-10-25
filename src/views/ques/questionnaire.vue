@@ -92,12 +92,7 @@ export default {
                 answers
             }).then(res => {
                 loading.close();
-                this.$alert('提交成功,点击确定查看报告','提示', {
-                    confirmButtonText: '确定',
-                    callback: () => {
-                        this.$router.push({path:'/report',query:{id:res.id}});
-                    }
-                });
+                this.$router.push({path:'/report',query:{id:res.id}});
             }).catch(() => {
                 loading.close();
             });

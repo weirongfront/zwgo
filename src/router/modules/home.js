@@ -6,7 +6,7 @@ const router = [
         component: () => import('@/views/home/dashboard'),
         name: 'home',
         meta: {title: '首页', noCache: true},
-        redirect:'/user'
+        role:[0,1]
     }
 ];
 

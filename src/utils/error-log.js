@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import store from '@/store'
 import { isString, isArray } from '@/utils/validate'
-import settings from '@/settings'
 
-// you can set in settings.js
 // errorLog:'production' | ['production', 'development']
-const { errorLog: needErrorLog } = settings
+const { errorLog: needErrorLog } = true;
 
 function checkNeed() {
   const env = process.env.NODE_ENV

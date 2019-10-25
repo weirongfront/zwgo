@@ -12,7 +12,15 @@ const router = [
                 path: '/ques/list',
                 component: () => import('@views/ques/list'),
                 name: 'ques-list',
-                meta: {title: '问卷列表', noCache: true}
+                meta: {title: '问卷列表', noCache: true},
+                role:[0]
+            },
+            {
+                path: '/ques/mylist',
+                component: () => import('@views/ques/mylist'),
+                name: 'ques-mylist',
+                meta: {title: '我的问卷列表', noCache: true},
+                role:[1]
             },
             {
                 path: '/ques/add',
@@ -24,7 +32,7 @@ const router = [
                 path: '/ques/statistics',
                 component: () => import('@views/ques/statistics'),
                 name: 'ques-statistics',
-                meta: {title: '答案统计列表', noCache: true}
+                meta: {title: '答案统计列表', noCache: true,menu:false}
             }
         ]
     }

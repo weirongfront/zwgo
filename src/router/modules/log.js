@@ -7,12 +7,14 @@ const router = [
         name: 'log',
         meta: {title: '日志管理', noCache: true},
         redirect:'/log/list',
+        role:[0],
         children:[
             {
                 path: '/log/list',
                 component: () => import('@views/log/list'),
                 name: 'log-list',
-                meta: {title: '日志列表', noCache: true}
+                meta: {title: '日志列表', noCache: true},
+                role:[0]
             }
         ]
     }

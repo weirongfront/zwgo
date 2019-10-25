@@ -72,7 +72,7 @@ export default {
                         this.loading = false;
                         if(res.status === 0){
                             this.$alert('恭喜您，注册成功!', {
-                                confirmButtonText: '确定',
+                                confirmButtonText: '立即登录',
                                 callback: () => {
                                     this.$router.push('/login');
                                 }

@@ -4,7 +4,7 @@ import store from '@/store/index'
 import {Message} from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import {getToken} from '@/utils/auth' // get token from cookie
+import {getToken,hasRoles} from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 Vue.use(Router);
@@ -36,16 +36,17 @@ export function resetRouter() {
 
 NProgress.configure({showSpinner: false}) // NProgress Configuration
 
-const whiteList = ['/login','/register','/auth-redirect','/questionnaire','/report'] // no redirect whitelist
-
 router.beforeEach(async (to, from, next) => {
     // start progress bar
-    NProgress.start()
+    NProgress.start();
     // set page title
     document.title = getPageTitle(to.meta.title);
     // determine whether the user has logged in
-    const hasToken = getToken();
-
+    const hasToken = getToken(),
+        pageRole = to.role,
+        userInfo = store.getters['user/info'],
+        userRole = userInfo && userInfo.role?userInfo.role.split(','):[],
+        hasRole = hasRoles(pageRole,userRole);
     if (hasToken) {
         // determine whether the user has obtained his permission roles through getInfo
         const hasRoles = true;//store.getters.roles && store.getters.roles.length > 0
@@ -76,7 +77,7 @@ router.beforeEach(async (to, from, next) => {
         }
     } else {
         /* has no token*/
-        if (whiteList.indexOf(to.path) !== -1) {
+        if (hasRole) {
             // in the free login whitelist, go directly
             next();
         } else {

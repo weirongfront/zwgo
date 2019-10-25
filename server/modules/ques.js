@@ -86,9 +86,20 @@ module.exports = (route,db,common) => {
         const selectUserList = `SELECT Id,user_name,title,active_time,createtime,\`status\` FROM questionnaires WHERE status = 0 ORDER BY createtime DESC`;
         db.query(selectUserList, (err, data) => {
             if (err) {
-                res.send(common.result(500,err.sqlMessage)).end();
+                common.send(req,res,db,500,err.sqlMessage);
             } else {
-                res.send(common.success(data)).end();
+                common.sendSuccess(req,res,db,data);
+            }
+        });
+    });
+    route.get('/ques/mylist', (req, res) => {
+        const name = req.headers.authorization;
+        const selectUserList = `SELECT Id,title,active_time,createtime,\`status\` FROM questionnaires WHERE status = 0 and user_name='${name}' ORDER BY createtime DESC`;
+        db.query(selectUserList, (err, data) => {
+            if (err) {
+                common.send(req,res,db,500,err.sqlMessage);
+            } else {
+                common.sendSuccess(req,res,db,data);
             }
         });
     });
@@ -207,9 +218,9 @@ module.exports = (route,db,common) => {
         sqlList = `SELECT Id as id,user_name as name,ip,createtime FROM answer_user WHERE questionnaire_id = ${questionnaireId}`;
         db.query(sqlList, (err, data) => {
             if (err) {
-                res.send(common.result(500,err.sqlMessage)).end();
+                common.send(req,res,db,500,err.sqlMessage);
             } else {
-                res.send(common.success(data)).end();
+                common.sendSuccess(data);
             }
         });
     });
@@ -218,7 +229,7 @@ module.exports = (route,db,common) => {
             sql = `SELECT questionnaire_id,createtime FROM answer_user WHERE Id = ${answerId}`;
         db.query(sql, (err, data) => {
             if (err) {
-                res.send(common.result(500,err.sqlMessage)).end();
+                common.send(req,res,db,500,err.sqlMessage);
             } else {
                 if(data.length === 0){
                     return common.sendSuccess(req,res,db,{status:5,tip:'无此答案记录'});

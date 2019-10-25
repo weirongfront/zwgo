@@ -6,25 +6,20 @@ const router = [
         component: () => import('@views/home/dashboard'),
         name: 'user',
         meta: {title: '用户管理', noCache: true},
-        redirect:'/user/list',
         children:[
-            {
-                path: '/user/list',
-                component: () => import('@views/user/list'),
-                name: 'user-list',
-                meta: {title: '用户列表', noCache: true}
-            },
             {
                 path: '/user/info',
                 component: () => import('@views/user/info'),
                 name: 'user-info',
-                meta: {title: '用户信息', noCache: true}
+                meta: {title: '用户信息', noCache: true},
+                role:[0,1]
             },
             {
                 path: '/user/updatepwd',
                 component: () => import('@views/user/updatepwd'),
                 name: 'user-updatepwd',
-                meta: {title: '修改密码', noCache: true}
+                meta: {title: '修改密码', noCache: true},
+                role:[0,1]
             }
         ]
     }

@@ -13,42 +13,21 @@
 <script>
 // @ is an alias to /src
 import {mapGetters} from "vuex";
+import * as quesRouter from "../../router/modules/ques";
+import * as cusRouter from "../../router/modules/custom";
+import * as logRouter from "../../router/modules/log";
+import * as userRouter from "../../router/modules/user";
+import {hasRoles} from "../../utils/auth";
 
 export default {
     name: "zw-aside",
     data() {
         return {
-            asideList:[
-                {
-                    title:'问卷统计',
-                    children:[
-                        {title:'问卷列表',path:'/ques/list'},
-                        {title:'新增问卷',path:'/ques/add'}
-                    ]
-                },
-                {
-                    title:'用户管理',
-                    children:[
-                        {title:'用户列表',path:'/user/list'}
-                    ]
-                },
-                {
-                    title:'日志管理',
-                    children:[
-                        {title:'日志列表',path:'/log/list'}
-                    ]
-                },
-                {
-                    title:'个人中心',
-                    children:[
-                        {title:'个人信息',path:'/user/info'},
-                        {title:'修改密码',path:'/user/updatepwd'}
-                    ]
-                }
-            ]
+            asideList:[]
         }
     },
     computed:{
+        ...mapGetters('user',{info:'info'}),
         openIndex(){
             let active = '';
             this.asideList.map((menu,index)=>{
@@ -62,8 +41,33 @@ export default {
         }
     },
     mounted() {
+        this.getAsideList();
     },
     methods: {
+        getAsideList(){
+            let userInfo = this.info,
+                userRole = userInfo && userInfo.role?userInfo.role.split(','):[];
+            const routers = [...quesRouter.default,...cusRouter.default,...logRouter.default,...userRouter.default];
+            routers.map(menu => {
+                if(hasRoles(menu.role,userRole)){
+                    let children = [];
+                    menu.children && menu.children.map(item=>{
+                        if(hasRoles(item.role,userRole) && item.meta.menu !== false){
+                            children.push({
+                                title:item.meta.title,
+                                path:item.path
+                            });
+                        }
+                    });
+                    if(children.length){
+                        this.asideList.push({
+                            title:menu.meta.title,
+                            children
+                        });
+                    }
+                }
+            });
+        }
     }
 };
 </script>
