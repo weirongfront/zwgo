@@ -2,14 +2,14 @@ import {service} from '../index';
 
 export function login(data) {
     return service({
-        url: '/user/login',
+        url: 'user/login',
         method: 'post',
         data
     })
 }
 export function register(data) {
     return service({
-        url: '/user/register',
+        url: 'user/register',
         method: 'post',
         data
     })
@@ -17,14 +17,14 @@ export function register(data) {
 
 export function getUserList() {
     return service({
-        url: '/user/list',
+        url: 'user/list',
         method: 'get'
     })
 }
 
 export function getUserInfo(data) {
     return service({
-        url: '/user/info',
+        url: 'user/info',
         method: 'get',
         params:data
     })
@@ -32,11 +32,11 @@ export function getUserInfo(data) {
 
 export function logout() {
     return service({
-        url: '/user/logout',
+        url: 'user/logout',
         method: 'post'
     })
 }
 
 export function updatePwd(data) {
-    return service.post('/user/updatePwd',data);
+    return service.post('user/updatePwd',data);
 }

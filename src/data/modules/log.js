@@ -2,7 +2,7 @@ import {service} from '../index';
 
 export function getLogList() {
     return service({
-        url: '/log/list',
+        url: 'log/list',
         method: 'get'
     })
 }
