@@ -173,7 +173,7 @@ module.exports = (route,db,common) => {
                 // 开始插入答案
                 let {questionnaireId,answers} = req.body,
                     name = req.headers.authorization,
-                    ip = req.hostname,
+                    ip = req.headers.origin,
                     total = 0;
                 let sql = `INSERT INTO answer_user(user_name,ip,questionnaire_id,createtime,updatetime) VALUES('${name}','${ip}',${questionnaireId},NOW(),NOW());`;
                 connection.query(sql, (err,data) => {

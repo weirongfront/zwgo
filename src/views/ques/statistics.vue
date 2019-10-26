@@ -1,8 +1,8 @@
 <template>
     <div>
-        <el-page-header @back="goback" content="作答统计">
-        </el-page-header>
-        <el-table :data="tableData" class="mt20">
+        <!--<el-page-header @back="goback" content="作答统计">
+        </el-page-header>-->
+        <el-table :data="tableData"><!-- class="mt20"-->
             <el-table-column prop="id" label="ID">
             </el-table-column>
             <el-table-column prop="name" label="提交人">

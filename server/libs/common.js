@@ -55,7 +55,7 @@ const common = {
             params = req.method.toLowerCase() === 'post'?req.body:req.query,
             result = JSON.stringify(data),
             begintime = common.parseTime(req.beginTime),
-            ip = req.hostname;
+            ip = req.headers.origin;
         params = JSON.stringify(params);
         const sql = `INSERT INTO log(user,url,method,params,result,ip,begintime,endtime) VALUES('${user}','${url}','${method}','${params}','${result}','${ip}','${begintime}',NOW())`;
         db.query(sql);
