@@ -7,6 +7,7 @@ common.async = require("async");
 const server = express();
 const mysql = require('mysql');
 const fs = require('fs');
+const https = require("https");
 
 const db = mysql.createPool({
     host: '49.234.68.90',
@@ -37,9 +38,20 @@ server.all('*', function (req, res, next) {
         next();
     }
 });
-server.listen(8888, () => {
+
+// Configuare https
+const httpsOption = {
+    key : fs.readFileSync("./https/2_zwgo.xyz.key"),
+    cert: fs.readFileSync("./https/1_zwgo.xyz_bundle.crt")
+};
+// Create service
+https.createServer(httpsOption, server).listen(8888,() => {
     console.log("服务已启动\n端口：8888");
 });
+
+/*server.listen(8888, () => {
+    console.log("服务已启动\n端口：8888");
+});*/
 
 // 动态分模块挂载各部分接口
 const route = express.Router();

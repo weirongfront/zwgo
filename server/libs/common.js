@@ -62,7 +62,9 @@ const common = {
     },
     sendSuccess(req,res,db,data){
         res.send(common.success(data)).end();
-        common.log(req,res,db,{code:200,data});
+        if(req.url.indexOf('list') === -1) {
+            common.log(req,res,db,{code:200,data});
+        }
     },
     send(req,res,db,code,msg){
         res.send({code,msg}).end();

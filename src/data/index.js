@@ -99,6 +99,10 @@ function getService(config) {
             }
         },
         error => {
+            Message({
+                message: error.message,
+                type: 'error'
+            });
             return Promise.reject(error);
         }
     );

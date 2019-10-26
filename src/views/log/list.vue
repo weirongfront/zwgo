@@ -13,9 +13,11 @@
             </el-table-column>
             <el-table-column prop="params" label="请求参数">
             </el-table-column>
-            <el-table-column prop="usetime" label="耗时">
+            <el-table-column prop="result" label="请求参数">
             </el-table-column>
-            <el-table-column prop="createtime" label="创建时间" :formatter="dateFormater">
+            <el-table-column prop="begintime" label="开始时间" :formatter="beginDateFormater">
+            </el-table-column>
+            <el-table-column prop="endtime" label="结束时间" :formatter="endDateFormater">
             </el-table-column>
         </el-table>
     </div>
@@ -36,8 +38,11 @@ export default {
         this.getLogList();
     },
     methods: {
-        dateFormater(row){
-            return parseTime(new Date(row.createtime));
+        beginDateFormater(row){
+            return parseTime(new Date(row.begintime));
+        },
+        endDateFormater(row){
+            return parseTime(new Date(row.endtime));
         },
         getLogList(){
             getLogList().then((list)=>{

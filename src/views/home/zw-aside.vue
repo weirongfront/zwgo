@@ -2,7 +2,7 @@
     <el-aside width="200px" style="background-color: #fff;">
         <el-menu :default-openeds="[openIndex]" :router="true" class="zw-menu">
             <el-submenu v-for="(menu,index) in asideList" :index="index+''" :key="index">
-                <template slot="title"><i class="el-icon-message"></i>{{menu.title}}</template>
+                <template slot="title"><i :class="menu.icon"></i>{{menu.title}}</template>
                 <el-menu-item-group>
                     <el-menu-item v-for="(item,itemIndex) in menu.children" :route="{path:item.path}" :index="index+'-'+itemIndex" :key="index+'-'+itemIndex">{{item.title}}</el-menu-item>
                 </el-menu-item-group>
@@ -27,7 +27,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('user',{info:'info'}),
+        ...mapGetters('user',{roles:'roles'}),
         openIndex(){
             let active = '';
             this.asideList.map((menu,index)=>{
@@ -45,14 +45,13 @@ export default {
     },
     methods: {
         getAsideList(){
-            let userInfo = this.info,
-                userRole = userInfo && userInfo.role?userInfo.role.split(','):[];
+            let userRole = this.roles;
             const routers = [...quesRouter.default,...cusRouter.default,...logRouter.default,...userRouter.default];
             routers.map(menu => {
-                if(hasRoles(menu.role,userRole)){
+                if(hasRoles(menu.meta.role,userRole)){
                     let children = [];
                     menu.children && menu.children.map(item=>{
-                        if(hasRoles(item.role,userRole) && item.meta.menu !== false){
+                        if(hasRoles(item.meta.role,userRole) && item.meta.menu !== false){
                             children.push({
                                 title:item.meta.title,
                                 path:item.path
@@ -62,11 +61,15 @@ export default {
                     if(children.length){
                         this.asideList.push({
                             title:menu.meta.title,
+                            icon:menu.meta.icon,
                             children
                         });
                     }
                 }
             });
+            if(this.asideList.length && this.$route.path === '/'){
+                this.$router.push(this.asideList[0].children[0]);
+            }
         }
     }
 };

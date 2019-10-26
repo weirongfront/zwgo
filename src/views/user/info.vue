@@ -10,8 +10,8 @@
             <el-form-item label="性别">
                 {{genderFormater(form.gender)}}
             </el-form-item>
-            <el-form-item label="生日">
-                {{form.birthday}}
+            <el-form-item v-if="form.birthday" label="生日">
+                {{dateFormater(form.birthday)}}
             </el-form-item>
         </el-form>
     </div>
@@ -20,6 +20,7 @@
 // @ is an alias to /src
 import {mapGetters} from "vuex";
 import {getUserInfo} from "../../data/modules/user";
+import {parseTime} from "../../utils";
 
 export default {
     name: "user-info",
@@ -37,6 +38,9 @@ export default {
     methods: {
         genderFormater(gender){
             return gender!==null?gender===0?'男':'女':'';
+        },
+        dateFormater(date){
+            return parseTime(date,'{y}-{m}-{d}');
         },
         getUserInfo(){
             getUserInfo({

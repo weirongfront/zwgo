@@ -5,21 +5,19 @@ const router = [
         path: '/user',
         component: () => import('@views/home/dashboard'),
         name: 'user',
-        meta: {title: '用户管理', noCache: true},
+        meta: {title: '个人中心', role:[0,1],icon:'el-icon-user-solid'},
         children:[
             {
                 path: '/user/info',
                 component: () => import('@views/user/info'),
                 name: 'user-info',
-                meta: {title: '用户信息', noCache: true},
-                role:[0,1]
+                meta: {title: '个人信息', role:[0,1]}
             },
             {
                 path: '/user/updatepwd',
                 component: () => import('@views/user/updatepwd'),
                 name: 'user-updatepwd',
-                meta: {title: '修改密码', noCache: true},
-                role:[0,1]
+                meta: {title: '修改密码', role:[0,1]}
             }
         ]
     }

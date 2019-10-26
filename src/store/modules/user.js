@@ -42,6 +42,7 @@ const actions = {
                     commit('SET_TOKEN', username.trim());
                     commit('SET_INFO',response.data);
                     commit('SET_NICK_NAME',response.data.nickname || response.data.name);
+                    commit('SET_ROLES',response.data.role.split(',').map(item=>parseInt(item)));
                     setToken(username.trim());
                     resolve();
                 }else{
@@ -136,7 +137,8 @@ const actions = {
 
 const getters = {
     nickname:state => state.nickname,
-    info:state => state.info
+    info:state => state.info,
+    roles:state => state.roles
 };
 
 export default {

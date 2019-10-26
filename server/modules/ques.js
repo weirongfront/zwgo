@@ -14,7 +14,7 @@ module.exports = (route,db,common) => {
                 // 开始插入问卷
                 req.body.name = req.headers.authorization;
                 let {title,name,activeTime,quesList} = req.body;
-                const sqlQues = `INSERT INTO questionnaires(user_name,title,counts,active_time,status,createtime) VALUES('${name}','${title}',0,'${activeTime}',0,NOW());`;
+                const sqlQues = `INSERT INTO questionnaires(user_name,title,active_time,createtime) VALUES('${name}','${title}','${activeTime}',NOW());`;
                 connection.query(sqlQues, (err,data) => {
                     if (err) {
                         connection.rollback(function () {
@@ -220,7 +220,7 @@ module.exports = (route,db,common) => {
             if (err) {
                 common.send(req,res,db,500,err.sqlMessage);
             } else {
-                common.sendSuccess(data);
+                common.sendSuccess(req,res,db,data);
             }
         });
     });

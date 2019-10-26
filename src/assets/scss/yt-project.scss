@@ -3,7 +3,7 @@
 
 html,body{min-width: $min-width+px;min-height: 100%;}
 
-#app{min-width: $min-width+px;min-height: $min-height+px;}
+#app{min-width: $min-width+px;min-height: 100%;}
 
 @media screen and (max-width: 760px) {
 	html,body{min-width: 100%;min-height: 100%;}

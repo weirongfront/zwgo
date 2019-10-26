@@ -94,6 +94,19 @@ export default {
                 }
             }
         };
+        let activeVali = (rule, value, callback) => {
+            if (!value || value.length === 0) {
+                callback(new Error('请选择有效日期'));
+            } else {
+                let curDate = new Date();
+                let preDate = new Date(curDate.getTime() - 24*60*60*1000); //前一天
+                if(value.getTime() < preDate.getTime()){
+                    callback(new Error('有效日期必须在今天及以后！'));
+                }else{
+                    callback();
+                }
+            }
+        };
         return {
             dialogQRVisible:false,
             dialogFormVisible:false,
@@ -111,7 +124,8 @@ export default {
                     { min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
                 ],
                 activeTime: [
-                    { type: 'date', required: true, message: '请选择有效日期', trigger: 'change' }
+                    { type: 'date', required: true, message: '请选择有效日期', trigger: 'change' },
+                    { validator: activeVali,trigger: 'change' }
                 ],
                 quesList:[
                     { validator: quesVali}
@@ -141,7 +155,7 @@ export default {
                         this.$alert('添加成功!', {
                             confirmButtonText: '确定',
                             callback: () => {
-                                this.$router.push('/ques/list');
+                                this.$router.push('/ques/mylist');
                             }
                         });
                     }).catch(() => {
@@ -171,6 +185,8 @@ export default {
                             this.optionTip = '请增加选项';
                             pass = false;
                         }
+                    }else{
+                        this.quesForm.options = [];
                     }
                     if(pass){
                         let ques = JSON.parse(JSON.stringify(this.quesForm));

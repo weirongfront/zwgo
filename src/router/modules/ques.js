@@ -5,28 +5,26 @@ const router = [
         path: '/ques',
         component: () => import('@views/home/dashboard'),
         name: 'ques',
-        meta: {title: '问卷管理', noCache: true},
+        meta: {title: '问卷管理', icon:'el-icon-document'},
         redirect:'/ques/list',
         children:[
             {
                 path: '/ques/list',
                 component: () => import('@views/ques/list'),
                 name: 'ques-list',
-                meta: {title: '问卷列表', noCache: true},
-                role:[0]
+                meta: {title: '问卷列表', role:[0]}
             },
             {
                 path: '/ques/mylist',
                 component: () => import('@views/ques/mylist'),
                 name: 'ques-mylist',
-                meta: {title: '我的问卷列表', noCache: true},
-                role:[1]
+                meta: {title: '我的问卷列表', role:[0,1]}
             },
             {
                 path: '/ques/add',
                 component: () => import('@views/ques/add'),
                 name: 'ques-add',
-                meta: {title: '新增问卷', noCache: true}
+                meta: {title: '新增问卷', role:[0,1]}
             },
             {
                 path: '/ques/statistics',

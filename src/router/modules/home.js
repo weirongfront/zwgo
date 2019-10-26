@@ -5,8 +5,10 @@ const router = [
         path: '/',
         component: () => import('@/views/home/dashboard'),
         name: 'home',
-        meta: {title: '首页', noCache: true},
-        role:[0,1]
+        meta: {
+            title: '首页',
+            role:[0,1]
+        }
     }
 ];
 
