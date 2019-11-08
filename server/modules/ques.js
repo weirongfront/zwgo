@@ -13,8 +13,8 @@ module.exports = (route,db,common) => {
                 }
                 // 开始插入问卷
                 req.body.name = req.headers.authorization;
-                let {title,name,activeTime,quesList} = req.body;
-                const sqlQues = `INSERT INTO questionnaires(user_name,title,active_time,createtime) VALUES('${name}','${title}','${activeTime}',NOW());`;
+                let {title,name,activeTime,quesList,needLogin,needReport} = req.body;
+                const sqlQues = `INSERT INTO questionnaires(user_name,title,active_time,createtime,need_login,need_report) VALUES('${name}','${title}','${activeTime}',NOW(),'${needLogin?1:0}','${needReport?1:0}');`;
                 connection.query(sqlQues, (err,data) => {
                     if (err) {
                         connection.rollback(function () {
@@ -83,7 +83,7 @@ module.exports = (route,db,common) => {
         });
     });
     route.get('/ques/list', (req, res) => {
-        const selectUserList = `SELECT Id,user_name,title,active_time,createtime,\`status\` FROM questionnaires WHERE status = 0 ORDER BY createtime DESC`;
+        const selectUserList = `SELECT Id,user_name,title,active_time,createtime,\`status\` FROM questionnaires ORDER BY createtime DESC`;
         db.query(selectUserList, (err, data) => {
             if (err) {
                 common.send(req,res,db,500,err.sqlMessage);
@@ -94,7 +94,7 @@ module.exports = (route,db,common) => {
     });
     route.get('/ques/mylist', (req, res) => {
         const name = req.headers.authorization;
-        const selectUserList = `SELECT Id,title,active_time,createtime,\`status\` FROM questionnaires WHERE status = 0 and user_name='${name}' ORDER BY createtime DESC`;
+        const selectUserList = `SELECT Id,title,active_time,createtime,\`status\` FROM questionnaires WHERE user_name='${name}' ORDER BY createtime DESC`;
         db.query(selectUserList, (err, data) => {
             if (err) {
                 common.send(req,res,db,500,err.sqlMessage);
@@ -114,6 +114,19 @@ module.exports = (route,db,common) => {
                     common.sendSuccess(req,res,db,{status:1,tip:'无此问卷'});
                 }else{
                     const result = data[0];
+                    if(result.need_login === 1 && !req.headers.authorization){
+                        common.sendSuccess(req,res,db,{status:6,tip:'该问卷需要登录，请先登录'});
+                        return false;
+                    }
+                    const nowTime = new Date();
+                    if(result.active_time.getTime()+(1000*60*60*24) < nowTime.getTime()){
+                        common.sendSuccess(req,res,db,{status:4,tip:'对不起，您来晚了，问卷已结束'});
+                        return false;
+                    }
+                    if(result.status === 1){
+                        common.sendSuccess(req,res,db,{status:5,tip:'该问卷已下线'});
+                        return false;
+                    }
                     const quesList = {};
                     sql = `SELECT Id,questionnaire_id,user_name,\`index\`,title,type,\`status\` FROM subjects where questionnaire_id = ${id}`;
                     db.query(sql, (err, sdata) => {
@@ -158,6 +171,18 @@ module.exports = (route,db,common) => {
             }
         });
     });
+    // 通过id设置问卷状态
+    route.post('/ques/setStatusById', (req, res) => {
+        let {id,status} = req.body;
+        let sql = `update questionnaires set status = ${status},updatetime = NOW() where Id = ${id}`;
+        db.query(sql, (err) => {
+            if (err) {
+                common.send(req,res,db,500,err.sqlMessage);
+            } else {
+                common.sendSuccess(req,res,db);
+            }
+        });
+    });
     route.post('/ques/saveAnswer', (req, res) => {
         db.getConnection(function (err, connection) {
             if (err) {
@@ -173,7 +198,7 @@ module.exports = (route,db,common) => {
                 // 开始插入答案
                 let {questionnaireId,answers} = req.body,
                     name = req.headers.authorization,
-                    ip = req.headers.origin,
+                    ip = req.ip,
                     total = 0;
                 let sql = `INSERT INTO answer_user(user_name,ip,questionnaire_id,createtime,updatetime) VALUES('${name}','${ip}',${questionnaireId},NOW(),NOW());`;
                 connection.query(sql, (err,data) => {

@@ -10,7 +10,7 @@
                     {{(index+1)+'、'+ques.title}}
                 </p>
                 <template v-if="ques.type === 1">
-                    <p class="ques-answer" v-if="ques.type ===1 || ques.type === 2">
+                    <p class="ques-answer">
                         答案：{{ques.options[parseInt(ques.answer)].title}}
                     </p>
                     <p class="ques-answer">
@@ -23,7 +23,7 @@
                             答案：
                         </p>
                         <div class="fl">
-                            <span v-for="(answer,aindex) in ques.answer.split(',')" :key="aindex">{{(aindex+1)+'、'+ques.options[parseInt(answer)].title}}<br/></span>
+                            <span v-for="(answer,aindex) in ques.answer.split(',')" :key="aindex">{{(parseInt(answer)+1)+'、'+ques.options[parseInt(answer)].title}}<br/></span>
                         </div>
                     </div>
                     <div class="clearfix ques-answer">
@@ -31,7 +31,7 @@
                             作答：
                         </p>
                         <div class="fl">
-                            <span v-for="(answer,aindex) in ques.userAnswer.split(',')" :key="aindex">{{(aindex+1)+'、'+ques.options[parseInt(answer)].title}}<br/></span>
+                            <span v-for="(answer,aindex) in ques.userAnswer.split(',')" :key="aindex">{{(parseInt(answer)+1)+'、'+ques.options[parseInt(answer)].title}}<br/></span>
                         </div>
                     </div>
                 </template>

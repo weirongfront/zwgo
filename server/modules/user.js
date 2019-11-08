@@ -41,6 +41,10 @@ module.exports = (route,db,common) => {
                     common.sendSuccess(req,res,db,{status:2,tip:'该用户不存在'});
                 } else {
                     let dataw = data[0];
+                    if(dataw.status === 1){
+                        common.sendSuccess(req,res,db,{status:3,tip:'该账户已被冻结'});
+                        return false;
+                    }
                     //login sucess
                     if (dataw.password === password) {
                         //save the session
@@ -58,7 +62,7 @@ module.exports = (route,db,common) => {
         common.sendSuccess(req,res,db);
     });
     route.get('/user/list', (req, res) => {
-        const selectUserList = `SELECT * FROM user`;
+        const selectUserList = `SELECT * FROM user WHERE user.role = 1`;
         db.query(selectUserList, (err, data) => {
             if (err) {
                 common.send(req,res,db,500,'服务器出错');
@@ -108,6 +112,18 @@ module.exports = (route,db,common) => {
                         common.sendSuccess(req,res,db,{status:2,tip:'原密码不正确'});
                     }
                 }
+            }
+        });
+    });
+    // 通过id设置用户状态
+    route.post('/user/setStatusById', (req, res) => {
+        let {id,status} = req.body;
+        let sql = `update user set status = ${status},updatetime = NOW() where Id = ${id}`;
+        db.query(sql, (err) => {
+            if (err) {
+                common.send(req,res,db,500,err.sqlMessage);
+            } else {
+                common.sendSuccess(req,res,db);
             }
         });
     });

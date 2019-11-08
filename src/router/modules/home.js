@@ -4,10 +4,17 @@ const router = [
     {
         path: '/',
         component: () => import('@/views/home/dashboard'),
-        name: 'home',
+        name: 'dashboard',
         meta: {
             title: '首页',
             role:[0,1]
+        }
+    },{
+        path: '/index',
+        component: () => import('@/views/home/index'),
+        name: 'home',
+        meta: {
+            title: '首页'
         }
     }
 ];

@@ -8,6 +8,12 @@
             <el-form-item label="有效期至" prop="activeTime" required>
                 <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.activeTime" style="width: 100%;"></el-date-picker>
             </el-form-item>
+            <el-form-item label="是否登录">
+                <el-switch v-model="ruleForm.needLogin" active-text="需要登录" inactive-text="无需登录"></el-switch><br/>
+            </el-form-item>
+            <el-form-item label="是否报告">
+                <el-switch v-model="ruleForm.needReport" active-text="需要报告" inactive-text="无需报告"></el-switch>
+            </el-form-item>
             <el-form-item label="问卷题目" prop="quesList" required>
                 <ul class="ques-list">
                     <li v-for="(ques,index) in ruleForm.quesList" :key="index" class="mt20">
@@ -115,6 +121,8 @@ export default {
                 activeTime: new Date(),
                 title:'',
                 quesList:[],
+                needLogin:false,
+                needReport:false
             },
             loading: false,
             optionTip:'',

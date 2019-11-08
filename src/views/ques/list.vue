@@ -3,20 +3,21 @@
         <el-table :data="tableData">
             <el-table-column prop="title" label="问卷名称">
             </el-table-column>
-            <el-table-column prop="user_name" label="创建人">
+            <el-table-column prop="user_name" width="120" label="创建人">
             </el-table-column>
-            <el-table-column prop="active_time" label="生效时间" :formatter="dateAFormater">
+            <el-table-column prop="active_time" width="120" label="有效期至" :formatter="dateAFormater">
             </el-table-column>
-            <el-table-column prop="createtime" label="创建时间" :formatter="dateFormater">
+            <el-table-column prop="createtime" width="200" label="创建时间" :formatter="dateFormater">
             </el-table-column>
-            <el-table-column prop="status" label="状态" :formatter="statusFormater">
+            <el-table-column prop="status" width="80" label="状态" :formatter="statusFormater">
             </el-table-column>
             <el-table-column
-                prop="operation" width="200"
+                prop="operation" width="300"
                 label="操作">
                 <template slot-scope="scope">
                     <el-button size="small" @click="showQR(scope.row.Id)">问卷地址</el-button>
                     <el-button size="small" type="primary" @click="toAnswList(scope.row.Id)">作答情况</el-button>
+                    <el-button size="small" type="danger" @click="setStatus(scope.row)">{{btnStatusFormater(scope.row)}}</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -28,7 +29,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import {getQuesList} from "../../data/modules/ques";
+import {getQuesList, setStatusById} from "../../data/modules/ques";
 import ZwQrcode from "../../components/zw-qrcode";
 import {parseTime} from "../../utils";
 
@@ -46,11 +47,14 @@ export default {
         this.getQuesList();
     },
     methods: {
+        btnStatusFormater(row){
+            return row.status === 0?'禁用':'启用';
+        },
         statusFormater(row){
-            return row.status === 0?'启用':'禁用'
+            return row.status === 0?'启用':'禁用';
         },
         dateAFormater(row){
-            return parseTime(new Date(row.active_time));
+            return parseTime(new Date(row.active_time),'{y}-{m}-{d}');
         },
         dateFormater(row){
             return parseTime(new Date(row.createtime));
@@ -58,6 +62,15 @@ export default {
         getQuesList(){
             getQuesList().then((list)=>{
                 this.tableData = list;
+            });
+        },
+        // 设置问卷状态
+        setStatus(row){
+            setStatusById({
+                id:row.Id,
+                status:row.status === 0?1:0
+            }).then(()=>{
+                this.getQuesList()
             });
         },
         showQR(id){

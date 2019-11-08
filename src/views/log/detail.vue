@@ -28,7 +28,7 @@ import {getLogList} from "../../data/modules/log";
 import {parseTime} from "../../utils";
 
 export default {
-    name: "log-list",
+    name: "log-detail",
     data() {
         return {
             tableData: []

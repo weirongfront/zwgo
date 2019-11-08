@@ -16,6 +16,10 @@ export function getById(data) {
     return service.get('ques/getById',data);
 }
 
+export function setStatusById(data) {
+    return service.post('ques/setStatusById',data);
+}
+
 export function saveAnswer(data) {
     return service.post('ques/saveAnswer',data);
 }

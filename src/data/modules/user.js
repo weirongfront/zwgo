@@ -40,3 +40,7 @@ export function logout() {
 export function updatePwd(data) {
     return service.post('user/updatePwd',data);
 }
+
+export function setStatusById(data) {
+    return service.post('user/setStatusById',data);
+}

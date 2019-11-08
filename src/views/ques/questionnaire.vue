@@ -59,6 +59,15 @@ export default {
                     res.data.createtime = parseTime(res.data.createtime,'{y}-{m}-{d}');
                     this.answer = answer;
                     this.questionnaire = res.data;
+                }else{
+                    this.$alert(res.tip,'提示',{
+                        confirmButtonText: res.status === 6?'去登录':'确定',
+                        callback: () => {
+                            if(res.status === 6){
+                                this.$router.push({path:'/login',query:Object.assign({redirect:this.$route.path},this.$route.query)});
+                            }
+                        }
+                    });
                 }
             }).catch(() => {
                 loading.close();

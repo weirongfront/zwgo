@@ -30,8 +30,8 @@ const createRouter = () => new Router({
 const router = createRouter();
 
 export function resetRouter() {
-    const newRouter = createRouter()
-    router.matcher = newRouter.matcher // reset router
+    const newRouter = createRouter();
+    router.matcher = newRouter.matcher; // reset router
 }
 
 NProgress.configure({showSpinner: false}) // NProgress Configuration
@@ -51,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
         if (hasToken) {
             Message.error('此账号无权限');
         } else {
-            next(`/login?redirect=${to.path}`);
+            next({path:'/login',query:Object.assign({redirect:to.path},to.query)});
         }
     }
     NProgress.done();
