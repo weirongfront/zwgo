@@ -1,34 +1,43 @@
 <template>
-    <div class="body">
-        <zw-header></zw-header>
-        <div class="zw-body" :style="{minHeight: this.height}">
-            <index-carousel></index-carousel>
-            <p class="title-font">{{title}}官网</p>
-            <nav>
-                <ul>
-                    <li><a href="/#/login">简介</a></li>
-                    <li><a href="/#/login">登录</a></li>
-                    <li><a href="/#/register">注册</a></li>
-                </ul>
-            </nav>
-        </div>
-        <zw-footer></zw-footer>
+    <div class="index-body">
+        <tool-list v-show="toolList.length" :list="toolList">
+            <zw-link route="/video/list">查看更多</zw-link>
+        </tool-list>
+        <case-list v-show="caseList.length" :list="caseList">
+            <zw-link route="/video/list">查看更多</zw-link>
+        </case-list>
+        <video-list v-show="videoList.length" :list="videoList">
+            <zw-link route="/video/list">查看更多</zw-link>
+        </video-list>
+        <audio-list v-show="audioList.length" :list="audioList">
+            <zw-link route="/video/list">查看更多</zw-link>
+        </audio-list>
+        <index-carousel class="mt30"></index-carousel>
     </div>
 </template>
 <script>
 // @ is an alias to /src
-import ZwHeader from "./zw-header";
-import ZwFooter from "./zw-footer";
 import IndexCarousel from "./index/carousel";
-import {title} from '@/config';
+import VideoList from "./index/video-list";
+import AudioList from "./index/audio-list";
+import ToolList from "./index/tool-list";
+import CaseList from "./index/case-list";
+import {getHomeVideoList} from "../../data/modules/video";
+import ZwLink from "../../components/ZwLink";
 
 export default {
     name: "dashboard",
-    components: {IndexCarousel, ZwFooter, ZwHeader},
+    components: {ZwLink, CaseList, ToolList, AudioList, VideoList, IndexCarousel},
     data() {
         return {
-            height:(window.innerHeight - 60 - 80)+'px',
-            title:title
+            caseList:[{title:'时钟',icon:''}],
+            audioList:[{title:''}],
+            videoList:[],
+            toolList:[
+                {title:'二维码生成',icon:'el-icon-s-grid',url:'/tools/qrcode'},
+                {title:'JSON格式化',icon:'el-icon-s-claim',url:''},
+                {title:'笔记本',icon:'el-icon-s-management',url:'/tools/notebook'}
+            ]
         }
     },
     computed:{
@@ -37,56 +46,21 @@ export default {
         }
     },
     mounted() {
-        window.addEventListener('resize',this.resize);
+        this.getHomeList();
     },
     methods: {
-        resize(){
-            this.height = Math.max(window.innerHeight - 60 - 80,460)+'px';
+        getHomeList(){
+            getHomeVideoList().then(res => {
+                this.videoList = res;
+            });
+        },
+        toPage(path){
+            this.$router.push({path:path});
         }
     },
     destroyed() {
-        window.removeEventListener('resize',this.resize);
     }
 };
 </script>
 <style lang="scss" scoped>
-    .body{background: #2d3a4b;}
-    .zw-body{
-        padding:20px;background: rgba(0,0,0,.3);width: 1190px;margin: 0 auto;box-shadow:0 5px 5px 5px #2d3a4b;
-        .title-font{font-size: 30px;font-weight: bold;color: #fff;text-align: center;margin-top: 20px;}
-        nav ul {
-            display: -moz-flex;width: 22.5rem;margin: 20px auto 0;
-            display: -webkit-flex;
-            display: -ms-flex;
-            display: flex;
-            list-style: none;
-            padding-left: 0;
-            border: solid 1px #ffffff;
-            border-radius: 4px;
-            li {
-                padding-left: 0;
-                border-left: solid 1px #ffffff;text-align: center;
-                &:first-child {
-                    border-left: 0;
-                }
-                a {
-                    display: block;color:#fff;
-                    min-width: 7.5rem;
-                    height: 2.75rem;
-                    line-height: 2.75rem;
-                    padding: 0 1.25rem 0 1.45rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.2rem;
-                    font-size: 0.8rem;
-                    border-bottom: 0;
-                    &:hover {
-                        background-color: rgba(255, 255, 255, 0.075);
-                    }
-                    &:active {
-                        background-color: rgba(255, 255, 255, 0.175);
-                    }
-                }
-            }
-        }
-    }
 </style>

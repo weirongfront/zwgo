@@ -1,9 +1,9 @@
 <template>
     <div :class="{fullscreen:fullscreen}" :style="{width:containerWidth}" class="tinymce-container">
         <textarea :id="tinymceId" class="tinymce-textarea"/>
-        <!--<div class="editor-custom-btn-container">
+        <div class="editor-custom-btn-container">
             <editorImage @successCBK="imageSuccessCBK" class="editor-upload-btn"/>
-        </div>-->
+        </div>
     </div>
 </template>
 

@@ -2,9 +2,11 @@
     <div class="qr-panel">
         <div class="clearfix">
             <el-input rows="10" class="fl qr-text" type="textarea" v-model="info" placeholder="请输入要生成的内容"></el-input>
-            <zw-qrcode class="fl" :height="150" :width="150" :content="content"></zw-qrcode>
+            <zw-qrcode class="fl ml30" :height="150" :width="150" :content="content"></zw-qrcode>
         </div>
-        <el-button type="primary" @click="draw">生成二维码</el-button>
+        <div class="btn-panel">
+            <el-button type="primary" @click="draw">生成二维码</el-button>
+        </div>
     </div>
 </template>
 <script>
@@ -30,7 +32,7 @@ export default {
 <style lang="scss" scoped>
     .qr-panel{
         .qr-text{width: 500px;height: 300px;}
+        .btn-panel{text-align: center;}
     }
-    .qr-text{width: 500px;height: 400px;}
 
 </style>

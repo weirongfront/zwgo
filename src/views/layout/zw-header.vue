@@ -1,6 +1,6 @@
 <template>
     <el-header class="clearfix zw-header">
-        <p class="fl zw-logo">调查问卷系统</p>
+        <p @click="toHome" class="fl zw-logo">{{title}}</p>
         <div class="fr">
             <el-dropdown v-if="nickname" @command="handleCommand">
                 <span class="el-dropdown-link">
@@ -19,9 +19,15 @@
 <script>
 // @ is an alias to /src
 import {mapGetters,mapActions} from "vuex";
+import config from "@/config";
 
 export default {
     name: "zw-header",
+    data(){
+        return {
+            title:config.title
+        }
+    },
     computed:{
         ...mapGetters('user',{nickname:'nickname'}),
         key() {
@@ -41,17 +47,19 @@ export default {
         },
         toLogin(){
             this.$router.push({path:'/login'});
+        },
+        toHome(){
+            this.$router.push('/');
         }
     }
 };
 </script>
 <style lang="scss" scoped>
     .el-header {
-        background-color: #B3C0D1;font-size: 14px;
-        color: #333;
+        font-size: 14px;background: #2b2a22;display: block;color:#f5bf45;position: relative;
         line-height: 60px;
         width: 100%;
-        .zw-logo{font-size: 16px;font-weight: bold;}
+        .zw-logo{font-size: 16px;font-weight: bold;cursor: pointer;}
         .el-dropdown-link {
             cursor: pointer;
         }

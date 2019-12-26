@@ -1,6 +1,6 @@
 <template>
     <el-footer height="80px" class="clearfix zw-header">
-        <p class="fl line-text">版权所有 京ICP备19031760号</p>
+        <p class="fl line-text">版权所有 <a href="http://beian.miit.gov.cn">京ICP备19031760号</a></p>
         <p class="fl line-text ml80">联系微信：836600877</p>
         <div class="fr clearfix">
             <div class="fl line-text mr30">
@@ -45,7 +45,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     .el-footer {
-        font-size: 16px;background: #2b2a22;display: block;color:#f5bf45;
+        font-size: 16px;background: #2b2a22;display: block;color:#f5bf45;position: relative;
         .line-text{line-height: 80px;}
         .mr30{margin-right: 30px;}
         .ml80{margin-left: 80px;}

@@ -3,7 +3,7 @@
 const router = [
     {
         path: '/log',
-        component: () => import('@views/home/dashboard'),
+        component: () => import('@views/layout/hmf'),
         name: 'log',
         meta: {title: '日志管理', role:[0],icon:'el-icon-s-platform'},
         redirect:'/log/list',

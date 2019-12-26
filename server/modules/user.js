@@ -46,13 +46,13 @@ module.exports = (route,db,common) => {
                         return false;
                     }
                     //login sucess
-                    if (dataw.password === password) {
-                        //save the session
-                        req.session.user = dataw;
-                        common.sendSuccess(req,res,db,{status:0,data:dataw});
-                    } else {
+                    if (dataw.password !== password) {
                         common.sendSuccess(req,res,db,{status:1,tip:'密码不正确'});
+                        return false;
                     }
+                    //save the session
+                    req.session.user = dataw;
+                    common.sendSuccess(req,res,db,{status:0,data:dataw});
                 }
             }
         });

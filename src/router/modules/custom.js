@@ -3,7 +3,7 @@
 const router = [
     {
         path: '/custom',
-        component: () => import('@views/home/dashboard'),
+        component: () => import('@views/layout/hmf'),
         name: 'custom',
         meta: {title: '用户管理', role:[0],icon:'el-icon-s-custom'},
         redirect:'/custom/list',

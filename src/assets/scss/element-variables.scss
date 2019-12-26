@@ -4,7 +4,7 @@
 **/
 
 /* theme color */
-$--color-primary: #3a85ff;
+$--color-primary: $yellow;
 $--color-success: #2ec0a0;
 $--color-warning: #FFBA00;
 $--color-danger: #f35a51;
@@ -12,10 +12,12 @@ $--color-info: #c3cad0;
 
 $--button-font-weight: 400;
 
+$--button-primary: $yellow;
+
 // $--color-text-regular: #1f2d3d;
 
 $--border-color-light: #c8d3da;
-$--border-color-lighter: #3a85ff;
+$--border-color-lighter: $yellow;
 
 $--table-border:1px solid#dfe6ec;
 

@@ -17,13 +17,13 @@ const db = mysql.createPool({
 });
 
 //deal (cookie,session)
-server.use(cookieParser('somesecretzwgo'));
+/*server.use(cookieParser('sessionzwgo'));
 
 server.use(session({
-    secret: 'somesecretzwgo',
+    secret: 'sessionzwgo',
     resave: true,
     saveUninitialized: true
-}));
+}));*/
 
 server.use(bodyParser.json());
 //the cores config
@@ -35,6 +35,7 @@ server.all('*', function (req, res, next) {
     if (req.method === 'OPTIONS') {
         res.send(200).end();
     } else {
+        console.log(req.session);
         next();
     }
 });
@@ -59,6 +60,11 @@ const modules = fs.readdirSync("./modules/");
 modules.map((modulePath) => {
     require('./modules/'+modulePath)(route,db,common);
 });
-
+route.use(session({
+    secret: 'keyboard',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: 60000}
+}));
 //deal router
 server.use('/api/', route);

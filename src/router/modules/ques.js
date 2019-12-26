@@ -3,7 +3,7 @@
 const router = [
     {
         path: '/ques',
-        component: () => import('@views/home/dashboard'),
+        component: () => import('@views/layout/hmf'),
         name: 'ques',
         meta: {title: '问卷管理', icon:'el-icon-document'},
         redirect:'/ques/list',

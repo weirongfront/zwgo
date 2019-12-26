@@ -3,7 +3,7 @@
 const router = [
     {
         path: '/user',
-        component: () => import('@views/home/dashboard'),
+        component: () => import('@views/layout/hmf'),
         name: 'user',
         meta: {title: '个人中心', role:[0,1],icon:'el-icon-user-solid'},
         children:[
