@@ -58,7 +58,7 @@ const common = {
             ip = req.ip;
         params = JSON.stringify(params);
         const sql = `INSERT INTO log(user,url,method,params,result,ip,begintime,endtime) VALUES('${user}','${url}','${method}','${params}','${result}','${ip}','${begintime}',NOW())`;
-        db.query(sql);
+        //db.query(sql);
     },
     sendSuccess(req,res,db,data){
         res.send(common.success(data)).end();
