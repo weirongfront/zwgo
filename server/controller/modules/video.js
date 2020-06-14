@@ -1,4 +1,4 @@
-const common = require('../libs/common');
+const common = require('../../libs/common');
 module.exports = (route,db) => {
     route.get('/video/list', (req, res) => {
         console.log(req.session,1);

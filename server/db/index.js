@@ -1,11 +1,12 @@
 const mysql = require('mysql');
 
 const db = mysql.createPool({
-    host: '49.234.68.90',
+    host: 'localhost',
     user: 'root',
-    password: '123456',
-    database: 'zwgo'
+    password: 'root001',
+    database: 'uui'
 });
+console.log('mysql--->creqte');
 
 module.exports = {
     db

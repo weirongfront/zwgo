@@ -1,4 +1,4 @@
-const common = require('../libs/common');
+const common = require('../../libs/common');
 module.exports = (route,db) => {
     route.get('/log/list', (req, res) => {
         const selectUserList = `SELECT * FROM log ORDER BY endtime DESC`;

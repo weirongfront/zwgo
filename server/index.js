@@ -7,16 +7,13 @@ const fs = require('fs');
 const https = require("https");
 
 const db = require('./db/index');
-
+db.init();
+console.log(db);
+return ;
 const redis = require('./index');
 
 
-// 动态分模块挂载各部分接口
-const route = express.Router();
-const modules = fs.readdirSync("./controller/");
-modules.map((modulePath) => {
-    require('./controller/'+modulePath)(route,db,common,redis);
-});
+
 /* route.use(session({
     secret: 'keyboard',
     resave: false,
