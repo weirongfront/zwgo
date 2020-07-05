@@ -1,67 +1,38 @@
-module.exports = (route,db,common) => {
+const db = require('../index.js');
+
+const dbModel = {
+    getByWhere:async (where)=>{
+        let sql = `SELECT id,name,nickname,birthday,icon,gender,phone,password FROM user ${(where || 'where 1=1')};`;
+        let result = await db.queryBySql(sql);
+        if(result.code === 200){
+            return {code:200,data:result.data[0]}
+        }else{
+            return result;
+        }
+    }
+};
+
+module.exports = {
+    getUserByOpenId:async id => {
+        let res = dbModel.getByWhere(`where openid='${id}'`);
+        return res;
+    },
     /*
      *user reg func
      */
-    route.post('/user/register', (req, res) => {
-        let {name,nickname,password,birthday,gender,icon} = req.body;
-        //regPasswd = common.md5(regPasswd + common.MD5_SUFFXIE);
-
-        let sql = `SELECT name FROM user where name='${name}'`;
-        db.query(sql, (err, data) => {
-            if (err) {
-                common.send(req,res,db,500,err.sqlMessage);
-            } else {
-                if (data.length === 0) {
-                    sql = `INSERT INTO user(name,nickname,password,birthday,gender,icon,createtime) VALUES('${name}','${nickname}','${password}','${birthday}','${gender}','${icon}',NOW())`;
-                    db.query(sql, (err) => {
-                        if (err) {
-                            common.send(req,res,db,500,err.sqlMessage);
-                        } else {
-                            common.sendSuccess(req,res,db,{status:0,data:{}});
-                        }
-                    })
-                } else {
-                    common.sendSuccess(req,res,db,{status:1,tip:'该登录名已存在'});
-                }
+    register:(data) => {
+        let keys = ['name','nickname','password','birthday','gender','icon','openid','phone'];
+        let names = [[],[]];
+        keys.map(key=>{
+            if(typeof data[key] !== 'undefined'){
+                names[0].push(key);
+                names[1].push("'"+data[key]+"'");
             }
         });
-    });
-
-    route.post('/user/login', (req, res) => {
-        let mObj = req.body;
-        let username = mObj.username;
-        let password = common.md5(mObj.password + common.MD5_SUFFXIE);
-        password = mObj.password;
-        const selectUser = `SELECT * FROM user where name='${username}'`;
-        db.query(selectUser, (err, data) => {
-            if (err) {
-                common.send(req,res,db,500,'服务器出错');
-            } else {
-                if (data.length == 0) {
-                    common.sendSuccess(req,res,db,{status:2,tip:'该用户不存在'});
-                } else {
-                    let dataw = data[0];
-                    if(dataw.status === 1){
-                        common.sendSuccess(req,res,db,{status:3,tip:'该账户已被冻结'});
-                        return false;
-                    }
-                    //login sucess
-                    if (dataw.password !== password) {
-                        common.sendSuccess(req,res,db,{status:1,tip:'密码不正确'});
-                        return false;
-                    }
-                    //save the session
-                    req.session.user = dataw;
-                    common.sendSuccess(req,res,db,{status:0,data:dataw});
-                }
-            }
-        });
-    });
-    // 登出
-    route.post('/user/logout', (req, res) => {
-        common.sendSuccess(req,res,db);
-    });
-    route.get('/user/list', (req, res) => {
+        sql = `INSERT INTO user(${names[0].join(',')},createtime) VALUES(${names[1].join(',')},NOW())`;
+        return db.queryBySql(sql);
+    },
+    getUserList:(pageNo, pageSize) => {
         const selectUserList = `SELECT * FROM user WHERE user.role = 1`;
         db.query(selectUserList, (err, data) => {
             if (err) {
@@ -70,9 +41,9 @@ module.exports = (route,db,common) => {
                 common.sendSuccess(req,res,db,data);
             }
         });
-    });
+    },
     // 获取用户信息
-    route.get('/user/info', (req, res) => {
+    getUserById:(id) => {
         let name = req.query.name;
         const sql = `SELECT name,nickname,birthday,icon,gender FROM user where name='${name}'`;
         db.query(sql, (err, data) => {
@@ -86,9 +57,9 @@ module.exports = (route,db,common) => {
                 }
             }
         });
-    });
+    },
     // 修改密码
-    route.post('/user/updatePwd', (req, res) => {
+    setUserPwd:(pwd) => {
         const {name,oldPassword,password} = req.body;
         let sql = `SELECT name,password FROM user where name='${name}'`;
         db.query(sql, (err, data) => {
@@ -114,17 +85,5 @@ module.exports = (route,db,common) => {
                 }
             }
         });
-    });
-    // 通过id设置用户状态
-    route.post('/user/setStatusById', (req, res) => {
-        let {id,status} = req.body;
-        let sql = `update user set status = ${status},updatetime = NOW() where Id = ${id}`;
-        db.query(sql, (err) => {
-            if (err) {
-                common.send(req,res,db,500,err.sqlMessage);
-            } else {
-                common.sendSuccess(req,res,db);
-            }
-        });
-    });
+    }
 }

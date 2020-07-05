@@ -5,13 +5,11 @@ const redis = require('redis'),
     client = redis.createClient(RDS_PORT, RDS_HOST, RDS_OPTS);
  
 client.on('ready', function(res){
-	console.log('redis--->ready',res)
+	console.log('redis--->ready')
 })
 client.on('error', function(res){
-	console.log('redis--->error',res)
+	console.log('redis--->error')
 })
  
 
-module.exports = {
-    client
-};
+module.exports = client;

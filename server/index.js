@@ -1,49 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const common = require('./libs/common');
-common.async = require("async");
 const server = express();
-const fs = require('fs');
-const https = require("https");
 
-const db = require('./db/index');
-db.init();
-console.log(db);
-return ;
-const redis = require('./index');
+console.log("==========================《《《当我醒来，太阳已喝醉》》》==========================");
 
-
-
-/* route.use(session({
-    secret: 'keyboard',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {maxAge: 60000}
-})); */
-//deal router
-server.use('/api/', route);
-
-server.use(bodyParser.json());
-//the cores config
-server.all('*', function (req, res, next) {
-    req.beginTime = new Date();
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-    if (req.method === 'OPTIONS') {
-        res.send(200).end();
-    } else {
-        redis.get("str1", function(err, reply){
-            console.log(err,reply)
-        })
-        next();
-    }
-});
+const router = require('./router');
+router(express,server);
 
 server.listen(8888, () => {
     console.log("服务已启动\n端口：8888");
 });
 
+
+// HTTPS 部分
+// const https = require("https");
 // Configuare https
 /* const httpsOption = {
     key : fs.readFileSync("./https/2_zwgo.xyz.key"),
